@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Página del Usuario</title>
+</head>
+<body>
+    <h2>Bienvenido, {{ user.username }}</h2>
+    <h3>Préstamos</h3>
+    <table>
+        <tr>
+            <th>ID del Préstamo</th>
+            <th>Monto</th>
+        </tr>
+        {% for loan in loans %}
+            <tr>
+                <td>{{ loan.id }}</td>
+                <td>{{ loan.amount }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
