@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+</head>
+<body>
+    <h1>Página del Superadministrador</h1>
+    
+    <form method="POST">
+        <input type="text" name="username" placeholder="Nombre de usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <input type="number" name="loan_amount" placeholder="Monto del préstamo">
+        <button type="submit">Agregar Usuario</button>
+    </form>
+
+    <h2>Usuarios Registrados</h2>
+    <table border="1">
+        <tr>
+            <th>Nombre de Usuario</th>
+            <th>Contraseña</th>
+            <th>Monto del Préstamo</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.password }}</td>
+            <td>
+                {% set loan = user.loans|first %}
+                {% if loan %}
+                    {{ loan.amount }}
+                {% else %}
+                    No asignado
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Botón de Atras -->
+    <form action="{{ url_for('login') }}" method="get">
+        <button type="submit">Atrás</button>
+    </form>
+</body>
+</html>
